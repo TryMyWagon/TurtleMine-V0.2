@@ -94,7 +94,7 @@ local function QuarryMain()
         elseif jTurn == false then
             turnLeft()
             tunnelOne()
-            turnRight()
+            turnLeft()
             jTurn = true
         end
     end

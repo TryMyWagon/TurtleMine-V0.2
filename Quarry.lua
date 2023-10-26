@@ -72,7 +72,7 @@ local function tunnelOne()
 end
 stripLenth = 1
 local function stripMine()
-    while stripLength <= 15 do
+    while stripLength < 16 do
         tunnelOne()
         stripLength = stripLength + 1
     end
@@ -82,7 +82,7 @@ end
 local function QuarryMain()
     stripRow = 1
     jTurn = true
-    while stripRow > 15 do
+    while stripRow < 16 do
         digCheckFront()
         forwardOne()
         stripMine()

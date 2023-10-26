@@ -100,4 +100,5 @@ local function QuarryMain()
     end
 
 end
+
 QuarryMain()

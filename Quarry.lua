@@ -60,10 +60,7 @@ local function digCheckUp()
     end
 end
 
-
-
 -- Diggy diggy hole
-
 local function tunnelOne()
     digCheckFront()
     forwardOne()
@@ -78,14 +75,11 @@ local function stripMine()
     end
 end
 
-
-
 local function QuarryMain()
+    tunnelOne()
     local jTurn = true
     local stripRow = 1
     while stripRow < 16 do
-        digCheckFront()
-        forwardOne()
         stripMine()
         stripRow = stripRow + 1  
         stripLength = 1
@@ -106,5 +100,4 @@ local function QuarryMain()
     end
 
 end
-
 QuarryMain()

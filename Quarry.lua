@@ -72,7 +72,7 @@ local function tunnelOne()
 end
 stripLength = 1
 local function stripMine()
-    while stripLength <= 16 do
+    while stripLength < 16 do
         tunnelOne()
         stripLength = stripLength + 1
     end
@@ -81,7 +81,7 @@ stripRow = 1
 jTurn = true
 
 local function QuarryMain()
-    while stripRow <= 16 do
+    while stripRow < 16 do
         digCheckFront()
         forwardOne()
         stripMine()
@@ -90,12 +90,12 @@ local function QuarryMain()
         -- 90 degree turn direction (jTurn)
         -- (true = right)
         -- (false = left)
-        if jTurn(true) then
+        if jTurn() == true then
             turnRight()
             tunnelOne()
             turnRight()
             jTurn = false
-        elseif jTurn(false) then
+        elseif jTurn() == false then
             turnLeft()
             tunnelOne()
             turnRight()

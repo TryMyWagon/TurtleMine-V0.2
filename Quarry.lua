@@ -1,7 +1,7 @@
 
 -- Cartesian coordinates start at 0, 0 
 --[[
-1 = xPos+              (1. ~ x+)
+1 = xPos+             (1. ~ x+)
 2 = zPos+                 |
 3 = xPos-                 |
 4 = zPos-    (4. ~ z-)----|----(2. ~ z+)
@@ -53,6 +53,21 @@ local function turnLeft()
     end
 end
 
+-- Fuelcheck function 
+local function fuelCheck()
+    if turtle.getFuelLevel() < 32 then
+        turtle.select(1)
+        turtle.refuel(1)
+    else
+        print("out of fuel")
+        while turtle.getFuelLevel() < 32 do
+            turtle.select(1)
+            turtle.refuel(1)
+            sleep(5)
+        end
+    end
+end
+
 local function digCheckFront()
     while turtle.detect() == true do
         turtle.dig()
@@ -74,6 +89,7 @@ end
 local function stripMine()
     local stripLength = 1
     while stripLength < 16 do
+        fuelCheck()
         tunnelOne()
         stripLength = stripLength + 1
     end
@@ -100,6 +116,7 @@ local function RTB()
             if turtle.detect() == true then
                 digCheckFront()
             end
+            fuelCheck()
             forwardOne()
             x = x - 1
         end
@@ -123,6 +140,7 @@ local function RTB()
             if turtle.detect() == true then
                 digCheckFront()
             end
+            fuelCheck()
             forwardOne()
             z = z - 1
         end
@@ -131,6 +149,7 @@ end
 
 
 local function QuarryMain()
+    fuelCheck()
     tunnelOne()
     local jTurn = true
     local stripRow = 0
@@ -146,11 +165,13 @@ local function QuarryMain()
             break
         elseif jTurn == true then
             turnRight()
+            fuelCheck()
             tunnelOne()
             turnRight()
             jTurn = false
         elseif jTurn == false then
             turnLeft()
+            fuelCheck()
             tunnelOne()
             turnLeft()
             jTurn = true

@@ -70,15 +70,40 @@ local function tunnelOne()
     digCheckUp()
     turtle.digDown()
 end
-
-
-stripLength = 1
-
-local function quarryMain()
+stripLenth = 1
+local function stripMine()
     while stripLength <= 15 do
         tunnelOne()
         stripLength = stripLength + 1
     end
     stripLenth = 1
+end
+
+
+local function quarryMain()
+    stripRow = 1
+    jTurn = true
+    while stripRow > 15 do
+        digCheckFront()
+        forwardOne()
+        stripMine()
+        stripRow = stripRow + 1
+        
+        -- 90 degree turn direction (jTurn)
+        -- (true = right)
+        -- (false = left)
+        if jTurn(true) then
+            turnRight()
+            tunnelOne()
+            turnRight()
+            jTurn = false
+        elseif jTurn(false) then
+            turnLeft()
+            tunnelOne()
+            turnRight()
+            jTurn = true
+        end
+    end
+
 end
 quarryMain()

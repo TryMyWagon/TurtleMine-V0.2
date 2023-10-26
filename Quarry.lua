@@ -156,6 +156,5 @@ local function QuarryMain()
         end
     end
 end
-
 QuarryMain()
 RTB()

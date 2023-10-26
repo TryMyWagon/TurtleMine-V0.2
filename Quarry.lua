@@ -96,7 +96,7 @@ local function RTB()
 
         -- burns up x's location data
         x = xRomPos
-        while x > 0 do
+        while x > 1 do
             if turtle.detect() == true then
                 digCheckFront()
             end
@@ -104,7 +104,7 @@ local function RTB()
             x = x - 1
         end
     end
-    if zPos > 0 then
+    if zPos > 1 then
         if tDir == 1 then
             turnLeft()
         elseif tDir == 2 then
@@ -155,7 +155,6 @@ local function QuarryMain()
             jTurn = true
         end
     end
-
 end
 
 QuarryMain()

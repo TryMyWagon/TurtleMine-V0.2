@@ -118,7 +118,8 @@ local function RTB()
 
         -- burns up z's location data
         z = zRomPos
-        while z > 1 do
+        -- the digit used in the "while" comparisson (0) is different than the xRomPos digit (1) for some reason?
+        while z > 0 do
             if turtle.detect() == true then
                 digCheckFront()
             end

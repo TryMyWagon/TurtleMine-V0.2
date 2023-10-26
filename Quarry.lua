@@ -104,7 +104,7 @@ local function RTB()
             x = x - 1
         end
     end
-    if zPos > 1 then
+    if zPos > 0 then
         if tDir == 1 then
             turnLeft()
         elseif tDir == 2 then
@@ -118,7 +118,7 @@ local function RTB()
 
         -- burns up z's location data
         z = zRomPos
-        while z > 0 do
+        while z > 1 do
             if turtle.detect() == true then
                 digCheckFront()
             end

@@ -75,7 +75,7 @@ end
 stripLength = 1
 
 local function quarryMain()
-    while stripLength <= 16 do
+    while stripLength <= 15 do
         tunnelOne()
         stripLength = stripLength + 1
     end

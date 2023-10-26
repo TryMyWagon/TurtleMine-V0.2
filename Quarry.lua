@@ -76,7 +76,6 @@ local function stripMine()
         tunnelOne()
         stripLength = stripLength + 1
     end
-    stripLenth = 1
 end
 
 
@@ -87,8 +86,8 @@ local function QuarryMain()
         digCheckFront()
         forwardOne()
         stripMine()
-        stripRow = stripRow + 1
-        
+        stripRow = stripRow + 1  
+        stripLenth = 1
         -- 90 degree turn direction (jTurn)
         -- (true = right)
         -- (false = left)

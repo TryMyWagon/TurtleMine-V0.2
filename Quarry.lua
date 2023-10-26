@@ -92,12 +92,12 @@ local function QuarryMain()
         -- 90 degree turn direction (jTurn)
         -- (true = right)
         -- (false = left)
-        if jTurn() == true then
+        if jTurn == true then
             turnRight()
             tunnelOne()
             turnRight()
             jTurn = false
-        elseif jTurn() == false then
+        elseif jTurn == false then
             turnLeft()
             tunnelOne()
             turnRight()

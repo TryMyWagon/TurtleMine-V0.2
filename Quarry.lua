@@ -2,12 +2,12 @@
 -- Cartesian coordinates start at 0, 0 
 --[[
 1 = xPos+              (1. ~ x+)
-2 = zPos-                  |
-3 = xPos-                  |
-4 = zPos+     (4. ~ z+)----|----(2. ~ z-)
-.                          |
-.                          |
-.                      (3. ~ x-)
+2 = zPos+                 |
+3 = xPos-                 |
+4 = zPos-    (4. ~ z-)----|----(2. ~ z+)
+.                         |
+.                         |
+.                     (3. ~ x-)
 ]]
 
 
@@ -15,20 +15,24 @@
 xPos = 0
 zPos = 0
 
+-- Rom 
+xRomPos = 0
+zRomPos = 0
+
 -- Direction is 1 to 4
 tDir = 1
-
+tRomDir = 1
 
 local function forwardOne()
     turtle.forward()
     if tDir == 1 then
         xPos = xPos + 1
+    elseif tDir == 2 then
+        zPos = zPos + 1
     elseif tDir == 3 then
         xPos = xPos - 1
-    elseif tDir == 2 then
-        zPos = zPos - 1
     elseif tDir == 4 then
-        zPos = zPos + 1
+        zPos = zPos - 1
     end
 end
 
@@ -67,26 +71,79 @@ local function tunnelOne()
     digCheckUp()
     turtle.digDown()
 end
-stripLength = 1
 local function stripMine()
+    local stripLength = 1
     while stripLength < 16 do
         tunnelOne()
         stripLength = stripLength + 1
     end
 end
 
+-- RTB function (stores starting location and direction data in x/zRomPos and tRomDir var's)
+local function RTB()
+    tRomDir = tDir
+    if xPos > 0 then
+        if tDir == 1 then
+            turnRight()
+            turnRight()
+        elseif tDir == 2 then
+            turnRight()
+        elseif tDir == 4 then
+            turnLeft()
+        end
+        -- stores location data in xRomPos
+        xRomPos = xPos
+
+        -- burns up x's location data
+        x = xRomPos
+        while x > 0 do
+            if turtle.detect() == true then
+                digCheckFront()
+            end
+            forwardOne()
+            x = x - 1
+        end
+    end
+    if zPos > 0 then
+        if tDir == 1 then
+            turnLeft()
+        elseif tDir == 2 then
+            turnRight()
+            turnRight()
+        elseif tDir == 3 then
+            turnRight()
+        end
+        -- stores location data in zRomPos
+        zRomPos = zPos
+
+        -- burns up z's location data
+        z = zRomPos
+        while z > 0 do
+            if turtle.detect() == true then
+                digCheckFront()
+            end
+            forwardOne()
+            z = z - 1
+        end
+    end
+end
+
+
 local function QuarryMain()
     tunnelOne()
     local jTurn = true
-    local stripRow = 1
+    local stripRow = 0
     while stripRow < 16 do
         stripMine()
-        stripRow = stripRow + 1  
-        stripLength = 1
+        stripRow = stripRow + 1
+        -- stripLength = 1
         -- 90 degree turn direction (jTurn)
         -- (true = right)
         -- (false = left)
-        if jTurn == true then
+        if stripRow == 16 then
+            stripRow = 0
+            break
+        elseif jTurn == true then
             turnRight()
             tunnelOne()
             turnRight()
@@ -102,3 +159,4 @@ local function QuarryMain()
 end
 
 QuarryMain()
+RTB()

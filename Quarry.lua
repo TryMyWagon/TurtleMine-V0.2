@@ -77,11 +77,10 @@ local function stripMine()
         stripLength = stripLength + 1
     end
 end
-
+stripRow = 1
+jTurn = true
 
 local function QuarryMain()
-    stripRow = 1
-    jTurn = true
     while stripRow <= 16 do
         digCheckFront()
         forwardOne()

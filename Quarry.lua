@@ -56,15 +56,15 @@ end
 -- Fuelcheck function 
 local function fuelCheck()
     if turtle.getFuelLevel() < 32 then
+        print("out of fuel")
+    end
+    while turtle.getFuelLevel() < 32 do
         turtle.select(1)
         turtle.refuel(1)
-    else
-        print("out of fuel")
-        while turtle.getFuelLevel() < 32 do
-            turtle.select(1)
-            turtle.refuel(1)
-            sleep(5)
+        if turtle.getFuelLevel() >= 32 then
+            break
         end
+        sleep(2)
     end
 end
 

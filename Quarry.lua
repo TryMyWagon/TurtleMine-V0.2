@@ -80,7 +80,7 @@ local function stripMine()
 end
 
 
-local function quarryMain()
+local function QuarryMain()
     stripRow = 1
     jTurn = true
     while stripRow > 15 do
@@ -106,4 +106,4 @@ local function quarryMain()
     end
 
 end
-quarryMain()
+QuarryMain()

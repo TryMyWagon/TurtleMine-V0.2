@@ -52,13 +52,11 @@ end
 local function digCheckFront()
     while turtle.detect() == true do
         turtle.dig()
-        sleep(0.5)
     end
 end
 local function digCheckUp()
     while turtle.detectUp() == true do
         turtle.digUp()
-        sleep(0.5)
     end
 end
 

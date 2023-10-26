@@ -70,6 +70,7 @@ local function tunnelOne()
     digCheckFront()
     forwardOne()
     digCheckUp()
+    turtle.digDown()
 end
 
 

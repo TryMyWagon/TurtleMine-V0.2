@@ -212,9 +212,9 @@ local function travelStartPoint()
     -- left = false
     -- right = true 
     if turtleCount < 15 then
-        local facingColumn = false
+        facingColumn = false
     else
-        local facingColumn = true
+        facingColumn = true
     end
     -- annotaes the distance on the chunk grid (x) the turtle needs to travel by counting the ammount of turtles the placing turtle has left 
     local chunkRow = 0

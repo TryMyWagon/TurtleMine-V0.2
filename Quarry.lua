@@ -210,7 +210,12 @@ end
 local function travelStartPoint()
     -- define right or left side 2 chunk columns from the placing turtle
     -- left = false
-    -- right = true 
+    -- right = true
+    if turtleCount == 3 or 4 or 7 or 8 or 11 or 12 or 15 or 16 then
+        facingColumn = true
+    else
+        facingColumn = false
+    end
     
     -- annotaes the distance on the chunk grid (x) the turtle needs to travel by counting the ammount of turtles the placing turtle has left 
     local chunkRow = 0
@@ -242,23 +247,21 @@ local function travelStartPoint()
         fuelCheck()
         tunnelOne()
     end
-    if facingColumn == false then
+    if facingColumn == true then
         turnRight()
     else
         turnLeft()
     end
     -- removes 16 blocks from the farthest right column because turtle is already in line with right side 1st column
-    if facingColumn == true then
+    -- and removes the need to traverse from the central column at all
+    if facingColumn == true and turtleCount == 3 or 7 or 11 or 15 then
+        return
+    elseif facingColumn == true then
         zStartingDistance = zStartingDistance - 16
     end
     for move = 1, zStartingDistance do
         fuelCheck()
         tunnelOne()
-    end
-    if facingColumn == true then
-        turnLeft()
-    else
-        turnRight()
     end
 end
 
@@ -293,14 +296,10 @@ end
 
 local function mainInit()
     sleep(1)
-    turtle.turnRight(2)
+    turtle.turnRight()
+    turtle.turnRight()
     turtle.select(1)
     turtleCount = (turtle.getItemCount())
-    if turtleCount < 15 then
-        facingColumn = false
-    else
-        facingColumn = true
-    end
     turtle.drop(64)
     turtle.turnLeft()
     travelStartPoint()
@@ -310,4 +309,5 @@ mainInit()
 
 
 -- // ADD // 
--- ERROR too many turtles 
+-- ERROR too many turtles
+-- Collect fuel from above

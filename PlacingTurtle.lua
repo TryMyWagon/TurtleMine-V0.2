@@ -4,7 +4,7 @@ local function Main()
     turtle.drop(64)
     turtle.turnRight()
     local computer = peripheral.wrap('left')
-    computer.turnOn(true)
+    computer.turnOn()
     turtle.turnLeft()
     sleep(10)
 end

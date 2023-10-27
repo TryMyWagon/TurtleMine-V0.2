@@ -15,6 +15,10 @@
 xPos = 0
 zPos = 0
 
+-- Rom 
+xRomPos = 0
+zRomPos = 0
+
 -- Direction is 1 to 4
 tDir = 1
 tRomDir = 1
@@ -122,14 +126,12 @@ end
 
 -- Return to base function (stores starting location and direction data in x/zRomPos and tRomDir var's)
 local function RTB()
-    print(xPos, zPos)
     -- stores location data in xRomPos
     xRomPos = xPos
     -- stores location data in zRomPos
     zRomPos = zPos
     -- stores direction data in tRomDir
     tRomDir = tDir
-    print(xRomPos, zRomPos)
     if xPos > 0 then
         if tDir == 1 then
             turnRight()
@@ -201,6 +203,7 @@ local function RTS()
             fuelCheck()
             forwardOne()
         end
+        
     end
 end
 

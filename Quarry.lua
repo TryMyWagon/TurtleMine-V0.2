@@ -138,13 +138,14 @@ local function RTB()
         end
         -- stores location data in xRomPos
         xRomPos = xPos
-
+        print(xRomPos, zRomPos)
         for xReturn = 1, xRomPos do
             if turtle.detect() == true then
                 digCheckFront()
             end
             fuelCheck()
             forwardOne()
+            print(xRomPos, zRomPos)
         end
     end
     if zPos > 0 then

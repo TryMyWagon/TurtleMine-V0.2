@@ -97,7 +97,7 @@ end
 
 -- Storage deposit function
 local function storeMaterials()
-    if xPos == 0 & zPos == 0 then
+    if xPos == 0 and zPos == 0 then
         if tDir == 1 then
             turnRight()
             turnRight()
@@ -112,7 +112,6 @@ local function storeMaterials()
                 turtle.select(store)
                 turtle.dropDown(64)
             end
-            store = 2
             turtle.select(1)
             turnRight()
             turnRight()
@@ -205,6 +204,8 @@ local function QuarryMain()
         end
     end
 end
+
 QuarryMain()
 RTB()
+print(xPos, zPos)
 storeMaterials()

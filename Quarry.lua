@@ -95,6 +95,33 @@ local function stripMine()
     end
 end
 
+-- Storage deposit function
+local function storeMaterials()
+    if xPos == 0 & zPos == 0 then
+        if tDir == 1 then
+            turnRight()
+            turnRight()
+        elseif tDir == 2 then
+            turnRight()
+        elseif tDir == 4 then
+            turnLeft()
+        end
+        if tDir == 3 then
+            forwardOne()
+            for store = 2, 16 do
+                turtle.select(store)
+                turtle.dropDown(64)
+            end
+            store = 2
+            turtle.select(1)
+            turnRight()
+            turnRight()
+            forwardOne()
+        end
+    end
+end
+
+
 -- RTB function (stores starting location and direction data in x/zRomPos and tRomDir var's)
 local function RTB()
     tRomDir = tDir
@@ -180,3 +207,4 @@ local function QuarryMain()
 end
 QuarryMain()
 RTB()
+storeMaterials()

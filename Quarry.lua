@@ -107,7 +107,7 @@ local function storeMaterials()
             turnLeft()
         end
         if tDir == 3 then
-            forwardOne()
+            turtle.forward()
             for store = 2, 16 do
                 turtle.select(store)
                 turtle.dropDown(64)
@@ -115,7 +115,7 @@ local function storeMaterials()
             turtle.select(1)
             turnRight()
             turnRight()
-            forwardOne()
+            turtle.forward()
         end
     end
 end
@@ -176,7 +176,10 @@ end
 
 local function QuarryMain()
     fuelCheck()
-    tunnelOne()
+    digCheckFront()
+    turtle.forward()
+    digCheckUp()
+    turtle.digDown()
     local jTurn = true
     local stripRow = 0
     while stripRow < 16 do

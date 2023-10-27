@@ -188,12 +188,13 @@ local function RTS()
             turnRight()
             turnRight()
         end
-        for returnZ = 0, zRomPos do
+        for returnZ = 1, zRomPos do
             if turtle.detect() == true then
                 digCheckFront()
             end
             fuelCheck()
             forwardOne()
+            print(xRomPos, zRomPos)
         end
         -- face z+ (north) and moves (zRomPos) distance in blocks
         if tDir == 2 then
@@ -204,12 +205,13 @@ local function RTS()
             turnRight()
             turnRight()
         end
-        for returnX = 0, xRomPos do
+        for returnX = 1, xRomPos do
             if turtle.detect() == true then
                 digCheckFront()
             end
             fuelCheck()
             forwardOne()
+            print(xRomPos, zRomPos)
         end
     end
 end
@@ -250,4 +252,5 @@ end
 QuarryMain()
 RTB()
 storeMaterials()
+print(xRomPos, zRomPos)
 RTS()

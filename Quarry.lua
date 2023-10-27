@@ -203,7 +203,7 @@ local function RTS()
             fuelCheck()
             forwardOne()
         end
-        
+
     end
 end
 
@@ -240,8 +240,17 @@ local function QuarryMain()
         end
     end
 end
-
+--[[
 QuarryMain()
 RTB()
 storeMaterials()
 RTS()
+]]--
+
+local function mainInit()
+    turtle.select(1)
+    local turtleCount = (turtle.getItemCount())
+    print(turtleCount)
+end
+
+mainInit()

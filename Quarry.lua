@@ -126,6 +126,11 @@ end
 
 -- Return to base function (stores starting location and direction data in x/zRomPos and tRomDir var's)
 local function RTB()
+    -- stores location data in xRomPos
+    xRomPos = xPos
+    -- stores location data in zRomPos
+    zRomPos = zPos
+    -- stores direction data in tRomDir
     tRomDir = tDir
     if xPos > 0 then
         if tDir == 1 then
@@ -136,16 +141,12 @@ local function RTB()
         elseif tDir == 4 then
             turnLeft()
         end
-        -- stores location data in xRomPos
-        xRomPos = xPos
-        print(xRomPos, zRomPos)
         for xReturn = 1, xRomPos do
             if turtle.detect() == true then
                 digCheckFront()
             end
             fuelCheck()
             forwardOne()
-            print(xRomPos, zRomPos)
         end
     end
     if zPos > 0 then
@@ -157,9 +158,6 @@ local function RTB()
         elseif tDir == 3 then
             turnRight()
         end
-        -- stores location data in zRomPos
-        zRomPos = zPos
-
         for zReturn = 1, zRomPos do
             if turtle.detect() == true then
                 digCheckFront()
@@ -188,7 +186,6 @@ local function RTS()
             end
             fuelCheck()
             forwardOne()
-            print(xRomPos, zRomPos)
         end
         -- face z+ (north) and moves (zRomPos) distance in blocks
         if tDir == 2 then
@@ -205,7 +202,6 @@ local function RTS()
             end
             fuelCheck()
             forwardOne()
-            print(xRomPos, zRomPos)
         end
     end
 end
@@ -247,5 +243,4 @@ end
 QuarryMain()
 RTB()
 storeMaterials()
-print(xRomPos, zRomPos)
 RTS()

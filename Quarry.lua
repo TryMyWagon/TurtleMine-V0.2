@@ -207,12 +207,47 @@ local function RTS()
     end
 end
 
+local function travelStartPoint()
+    local chunkRow = 0
+    if turtleCount == 15 or 14 or 13 or 12 then
+        chunkRow = 3
+    elseif turtleCount == 11 or 10 or 9 or 8 then
+        chunkRow = 2
+    elseif turtleCount == 7 or 6 or 5 or 4 then
+        chunkRow = 1
+    elseif turtleCount == 3 or 2 or 1 or 0 then
+        chunkRow = 0
+    end
+    local xStartingDistance = chunkRow * 16
+    local chunkColumn = 1
+    if turtleCount == 1 or 5 or 9 or 13 then
+        chunkColumn = 1
+    elseif turtleCount == 2 or 6 or 10 or 14 then
+        chunkColumn = 2
+    elseif turtleCount == 3 or 7 or 11 or 15 then
+        chunkColumn = 3
+    elseif turtleCount == 4 or 8 or 12 or 16 then
+        chunkColumn = 4
+    end
+    local zStartingDistance = chunkColumn * 16
+
+    for move = 1, xStartingDistance do
+        fuelCheck()
+        tunnelOne()
+    end
+
+    turnLeft()
+
+    for move = 1, zStartingDistance do
+        fuelCheck()
+        tunnelOne()
+    end
+
+    turnRight()
+
+end
+
 local function QuarryMain()
-    fuelCheck()
-    digCheckFront()
-    turtle.forward()
-    digCheckUp()
-    turtle.digDown()
     local jTurn = true
     local stripRow = 0
     while stripRow < 16 do
@@ -240,17 +275,13 @@ local function QuarryMain()
         end
     end
 end
---[[
-QuarryMain()
-RTB()
-storeMaterials()
-RTS()
-]]--
 
 local function mainInit()
+    sleep(5)
     turtle.select(1)
-    local turtleCount = (turtle.getItemCount())
-    print(turtleCount)
+    turtleCount = (turtle.getItemCount())
+    turtle.dropUp(64)
+    travelStartPoint()
 end
 
 mainInit()

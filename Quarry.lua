@@ -293,6 +293,7 @@ end
 
 local function mainInit()
     sleep(1)
+    turtle.turnRight(2)
     turtle.select(1)
     turtleCount = (turtle.getItemCount())
     if turtleCount < 15 then
@@ -300,7 +301,8 @@ local function mainInit()
     else
         facingColumn = true
     end
-    turtle.dropUp(64)
+    turtle.drop(64)
+    turtle.turnLeft()
     travelStartPoint()
 end
 

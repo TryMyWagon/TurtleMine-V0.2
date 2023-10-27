@@ -8,4 +8,5 @@ local function Main()
     turtle.turnLeft()
     sleep(10)
 end
+
 Main()

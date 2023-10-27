@@ -138,7 +138,7 @@ local function RTB()
 
         -- burns up x's location data
         x = xRomPos
-        while x > 1 do
+        while x > 0 do
             if turtle.detect() == true then
                 digCheckFront()
             end

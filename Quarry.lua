@@ -23,6 +23,7 @@ zRomPos = 0
 tDir = 1
 tRomDir = 1
 
+-- movement to keep track of cartesian position
 local function forwardOne()
     turtle.forward()
     if tDir == 1 then
@@ -36,6 +37,7 @@ local function forwardOne()
     end
 end
 
+-- Right and left turn direction reccords
 local function turnRight()
     turtle.turnRight()
     if tDir == 4 then
@@ -56,7 +58,7 @@ end
 -- Fuelcheck function 
 local function fuelCheck()
     if turtle.getFuelLevel() < 32 then
-        print("out of fuel")
+        print("Refueling")
     end
     while turtle.getFuelLevel() < 32 do
         turtle.select(1)
@@ -68,6 +70,7 @@ local function fuelCheck()
     end
 end
 
+-- digChecks for gravel/sand etc
 local function digCheckFront()
     while turtle.detect() == true do
         turtle.dig()
@@ -121,7 +124,7 @@ local function storeMaterials()
 end
 
 
--- RTB function (stores starting location and direction data in x/zRomPos and tRomDir var's)
+-- Return to base function (stores starting location and direction data in x/zRomPos and tRomDir var's)
 local function RTB()
     tRomDir = tDir
     if xPos > 0 then
@@ -173,6 +176,43 @@ local function RTB()
     end
 end
 
+-- Return to scene function (Return to the cordinates stored in x/zRomPos and tRomDir var's)
+local function RTS()
+    if xPos == 0 and zPos == 0 then
+        -- face x+ (east) and moves (xRomPos) distance in blocks
+        if tDir == 1 then
+            turnRight()
+        elseif tDir == 3 then
+            turnLeft()
+        elseif tDir == 4 then
+            turnRight()
+            turnRight()
+        end
+        for returnZ = 0, zRomPos do
+            if turtle.detect() == true then
+                digCheckFront()
+            end
+            fuelCheck()
+            forwardOne()
+        end
+        -- face z+ (north) and moves (zRomPos) distance in blocks
+        if tDir == 2 then
+            turnLeft()
+        elseif tDir == 4 then
+            turnRight()
+        elseif tDir == 3 then
+            turnRight()
+            turnRight()
+        end
+        for returnX = 0, xRomPos do
+            if turtle.detect() == true then
+                digCheckFront()
+            end
+            fuelCheck()
+            forwardOne()
+        end
+    end
+end
 
 local function QuarryMain()
     fuelCheck()
@@ -207,8 +247,6 @@ local function QuarryMain()
         end
     end
 end
-
 QuarryMain()
 RTB()
-print(xPos, zPos)
 storeMaterials()

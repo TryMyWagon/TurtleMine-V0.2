@@ -1,6 +1,6 @@
 local function Main()
     turtle.select(1)
-    turtle.placedown()
+    turtle.placeDown()
     turtle.dropDown(64)
     sleep(10)
 end

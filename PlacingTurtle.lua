@@ -4,6 +4,4 @@ local function Main()
     turtle.dropDown(64)
     sleep(10)
 end
-
-
 Main()

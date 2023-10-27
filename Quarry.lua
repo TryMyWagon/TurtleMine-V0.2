@@ -208,6 +208,15 @@ local function RTS()
 end
 
 local function travelStartPoint()
+    -- define right or left side 2 chunk columns from the placing turtle
+    -- left = false
+    -- right = true 
+    if turtleCount < 15 then
+        local facingColumn = false
+    else
+        local facingColumn = true
+    end
+    -- annotaes the distance on the chunk grid (x) the turtle needs to travel by counting the ammount of turtles the placing turtle has left 
     local chunkRow = 0
     if turtleCount == 15 or 14 or 13 or 12 then
         chunkRow = 3
@@ -219,32 +228,38 @@ local function travelStartPoint()
         chunkRow = 0
     end
     local xStartingDistance = chunkRow * 16
+    -- annotaes the distance on the chunk grid (z) the turtle needs to travel by counting the ammount of turtles the placing turtle has left 
     local chunkColumn = 1
     if turtleCount == 1 or 5 or 9 or 13 then
-        chunkColumn = 1
-    elseif turtleCount == 2 or 6 or 10 or 14 then
         chunkColumn = 2
+    elseif turtleCount == 2 or 6 or 10 or 14 then
+        chunkColumn = 1
     elseif turtleCount == 3 or 7 or 11 or 15 then
-        chunkColumn = 3
+        chunkColumn = 1
     elseif turtleCount == 4 or 8 or 12 or 16 then
-        chunkColumn = 4
+        chunkColumn = 2
     end
     local zStartingDistance = chunkColumn * 16
 
+    -- moves to the location deduced by above
     for move = 1, xStartingDistance do
         fuelCheck()
         tunnelOne()
     end
-
-    turnLeft()
-
+    if facingColumn == false then
+        turnLeft()
+    else
+        turnRight()
+    end
     for move = 1, zStartingDistance do
         fuelCheck()
         tunnelOne()
     end
-
-    turnRight()
-
+    if facingColumn == true then
+        turnRight()
+    else
+        turnLeft()
+    end
 end
 
 local function QuarryMain()
@@ -277,7 +292,7 @@ local function QuarryMain()
 end
 
 local function mainInit()
-    sleep(5)
+    sleep(1)
     turtle.select(1)
     turtleCount = (turtle.getItemCount())
     turtle.dropUp(64)

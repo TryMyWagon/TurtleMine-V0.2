@@ -247,18 +247,22 @@ local function travelStartPoint()
         tunnelOne()
     end
     if facingColumn == false then
-        turnLeft()
-    else
         turnRight()
+    else
+        turnLeft()
+    end
+    -- removes 16 blocks from the farthest right column because turtle is already in line with right side 1st column
+    if facingColumn == true then
+        zStartingDistance = zStartingDistance - 16
     end
     for move = 1, zStartingDistance do
         fuelCheck()
         tunnelOne()
     end
     if facingColumn == true then
-        turnRight()
-    else
         turnLeft()
+    else
+        turnRight()
     end
 end
 

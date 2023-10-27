@@ -139,15 +139,12 @@ local function RTB()
         -- stores location data in xRomPos
         xRomPos = xPos
 
-        -- burns up x's location data
-        x = xRomPos
-        while x > 0 do
+        for xReturn = 1, xRomPos do
             if turtle.detect() == true then
                 digCheckFront()
             end
             fuelCheck()
             forwardOne()
-            x = x - 1
         end
     end
     if zPos > 0 then
@@ -162,16 +159,12 @@ local function RTB()
         -- stores location data in zRomPos
         zRomPos = zPos
 
-        -- burns up z's location data
-        z = zRomPos
-        -- the digit used in the "while" comparisson (0) is different than the xRomPos digit (1) for some reason?
-        while z > 0 do
+        for zReturn = 1, zRomPos do
             if turtle.detect() == true then
                 digCheckFront()
             end
             fuelCheck()
             forwardOne()
-            z = z - 1
         end
     end
 end

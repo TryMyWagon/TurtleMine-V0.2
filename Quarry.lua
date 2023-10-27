@@ -211,11 +211,7 @@ local function travelStartPoint()
     -- define right or left side 2 chunk columns from the placing turtle
     -- left = false
     -- right = true 
-    if turtleCount < 15 then
-        facingColumn = false
-    else
-        facingColumn = true
-    end
+    
     -- annotaes the distance on the chunk grid (x) the turtle needs to travel by counting the ammount of turtles the placing turtle has left 
     local chunkRow = 0
     if turtleCount == 15 or 14 or 13 or 12 then
@@ -299,6 +295,11 @@ local function mainInit()
     sleep(1)
     turtle.select(1)
     turtleCount = (turtle.getItemCount())
+    if turtleCount < 15 then
+        facingColumn = false
+    else
+        facingColumn = true
+    end
     turtle.dropUp(64)
     travelStartPoint()
 end

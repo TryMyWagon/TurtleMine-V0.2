@@ -319,6 +319,7 @@ local function mainInit()
     TurtleCount = (turtle.getItemCount())
     turtle.drop(64)
     turtle.turnLeft()
+    fuelObtain()
     travelStartPoint()
     faceNorth()
 end

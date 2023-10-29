@@ -241,7 +241,7 @@ local function travelStartPoint()
             fuelCheck()
             tunnelOne()
         end
-    elseif TurtleCount >= 7 and TurtleCount <= 4 then
+    elseif TurtleCount >= 4 and TurtleCount <= 7 then
         for move = 1, 16 do
             fuelCheck()
             tunnelOne()
@@ -322,6 +322,7 @@ local function mainInit()
     turtle.drop(64)
     turtle.turnLeft()
     fuelObtain()
+    forwardOne()
     travelStartPoint()
     faceNorth()
 end

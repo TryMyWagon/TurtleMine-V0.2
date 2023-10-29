@@ -230,8 +230,8 @@ local function travelStartPoint()
             tunnelOne()
         end
         turnLeft()
-    end
-    if turtleCount ==
+
+    elseif turtleCount ==
     0 or 1 or 4 or 5 or
     8 or 9 or 10 or 11 then
         turnLeft()
@@ -252,7 +252,7 @@ end
 
 local function QuarryMain()
     local jTurn = true
-    local stripRow = 0eeee
+    local stripRow = 0
     while stripRow < 16 do
         stripMine()
         stripRow = stripRow + 1

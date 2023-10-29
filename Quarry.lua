@@ -83,13 +83,13 @@ end
 -- pick up fuel from chest above (coal blocks)
 local function fuelObtain()
     turtle.select(1)
-    if turtle.getItemDetail.name("minecraft:coal_block") then
-        fuelCheck()
-    else
-        turtle.dropDown()
-        turtle.suckUp(5)
-        fuelCheck()
-    end
+--    if turtle.getItemDetail.name("minecraft:coal_block") then
+--        fuelCheck()
+--    else
+    turtle.dropDown()
+    turtle.suckUp(5)
+    fuelCheck()
+--    end
 end
 
 -- digChecks for gravel/sand etc
@@ -314,7 +314,6 @@ local function QuarryMain()
 end
 
 local function mainInit()
-    sleep(1)
     turtle.turnRight()
     turtle.turnRight()
     turtle.select(1)
@@ -325,6 +324,10 @@ local function mainInit()
     forwardOne()
     travelStartPoint()
     faceNorth()
+    QuarryMain()
+    RTB()
+    storeMaterials()
+    RTS()
 end
 
 

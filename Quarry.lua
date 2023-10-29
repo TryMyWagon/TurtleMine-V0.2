@@ -208,17 +208,17 @@ local function RTS()
 end
 
 local function travelStartPoint()
-    if turtleCount == 15 or 14 or 13 or 12 then
+    if turtleCount >= 12 and turtleCount <= 15 then
         for move = 1, 48 do
             fuelCheck()
             tunnelOne()
         end
-    elseif turtleCount == 11 or 10 or 9 or 8 then
+    elseif turtleCount >= 8 and turtleCount <= 11  then
         for move = 1, 32 do
             fuelCheck()
             tunnelOne()
         end
-    elseif turtleCount == 7 or 6 or 5 or 4 then
+    elseif turtleCount >= 7 and turtleCount <= 4 then
         for move = 1, 16 do
             fuelCheck()
             tunnelOne()

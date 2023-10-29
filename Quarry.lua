@@ -224,24 +224,55 @@ local function travelStartPoint()
             tunnelOne()
         end
     end
-    if(turtleCount == 15 or 14 or 11 or 10 or 7 or 6 or 3 or 2)  then
+    leftOrRight[15] = false
+    leftOrRight[14] = false
+    leftOrRight[11] = false
+    leftOrRight[10] = false
+    leftOrRight[7] = false
+    leftOrRight[6] = false
+    leftOrRight[3] = false
+    leftOrRight[2] = false
+    leftOrRight[13] = true
+    leftOrRight[9] = true
+    leftOrRight[5] = true
+    leftOrRight[1] = true
+    if leftOrRight[turtleCount] == false then
         turnLeft()
-    elseif(turtleCount == 13 or 9 or 5 or 1) then
+    elseif leftOrRight[turtleCount] == true then
         turnRight()
     end
-    if (turtleCount == 15 or 11 or 7 or 3) then
+    howManyBlocks[15] = 32
+    howManyBlocks[11] = 32
+    howManyBlocks[7] = 32
+    howManyBlocks[3] = 32
+    howManyBlocks[14] = 16
+    howManyBlocks[10] = 16
+    howManyBlocks[6] = 16
+    howManyBlocks[2] = 16
+    howManyBlocks[13] = 16
+    howManyBlocks[9] = 16
+    howManyBlocks[5] = 16
+    howManyBlocks[1] = 16
+
+    for move = 1, howManyBlocks[turtleCount] do
+        fuelCheck()
+        tunnelOne()
+    end
+end
+--[[
+    if(turtleCount == 15 or 11 or 7 or 3) then
         for move = 1, 32 do
             fuelCheck()
             tunnelOne()
         end
         turnRight()
-    elseif (turtleCount == 14 or 10 or 6 or 2) then
+    elseif(turtleCount == 14 or 10 or 6 or 2) then
         for move = 1, 16 do
             fuelCheck()
             tunnelOne()
         end
         turnRight()
-    elseif (turtleCount == 13 or 9 or 5 or 1) then
+    elseif(turtleCount == 13 or 9 or 5 or 1) then
         for move = 1, 16 do
             fuelCheck()
             tunnelOne()
@@ -249,7 +280,7 @@ local function travelStartPoint()
         turnLeft()
     end
 end
-
+]]--
 local function QuarryMain()
     local jTurn = true
     local stripRow = 0

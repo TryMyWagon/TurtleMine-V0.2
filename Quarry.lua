@@ -208,60 +208,45 @@ local function RTS()
 end
 
 local function travelStartPoint()
-    -- define right or left side 2 chunk columns from the placing turtle
-    -- left = false
-    -- right = true
-    if turtleCount == 3 or 4 or 7 or 8 or 11 or 12 or 15 or 16 then
-        facingColumn = true
-    else
-        facingColumn = false
+    if turtleCount == 1 or 2 or 3 or 4 then
+        for move = 1, 48 do
+            fuelCheck()
+            tunnelOne()
+        end
+    elseif turtleCount == 5 or 6 or 7 or 8 then
+        for move = 1, 32 do
+            fuelCheck()
+            tunnelOne()
+        end
+    elseif turtleCount == 9 or 10 or 11 or 12 then
+        for move = 1, 16 do
+            fuelCheck()
+            tunnelOne()
+        end
     end
-    
-    -- annotaes the distance on the chunk grid (x) the turtle needs to travel by counting the ammount of turtles the placing turtle has left 
-    local chunkRow = 0
-    if turtleCount == 15 or 14 or 13 or 12 then
-        chunkRow = 3
-    elseif turtleCount == 11 or 10 or 9 or 8 then
-        chunkRow = 2
-    elseif turtleCount == 7 or 6 or 5 or 4 then
-        chunkRow = 1
-    elseif turtleCount == 3 or 2 or 1 or 0 then
-        chunkRow = 0
-    end
-    local xStartingDistance = chunkRow * 16
-    -- annotaes the distance on the chunk grid (z) the turtle needs to travel by counting the ammount of turtles the placing turtle has left 
-    local chunkColumn = 1
-    if turtleCount == 1 or 5 or 9 or 13 then
-        chunkColumn = 2
-    elseif turtleCount == 2 or 6 or 10 or 14 then
-        chunkColumn = 1
-    elseif turtleCount == 3 or 7 or 11 or 15 then
-        chunkColumn = 1
-    elseif turtleCount == 4 or 8 or 12 or 16 then
-        chunkColumn = 2
-    end
-    local zStartingDistance = chunkColumn * 16
-
-    -- moves to the location deduced by above
-    for move = 1, xStartingDistance do
-        fuelCheck()
-        tunnelOne()
-    end
-    if facingColumn == true then
+    if turtleCount == 4 or 8 or 12 or 16 then
         turnRight()
-    else
+        for move = 1, 16 do
+            tunnelOne()
+        end
         turnLeft()
     end
-    -- removes 16 blocks from the farthest right column because turtle is already in line with right side 1st column
-    -- and removes the need to traverse from the central column at all
-    if facingColumn == true and turtleCount == 3 or 7 or 11 or 15 then
-        return
-    elseif facingColumn == true then
-        zStartingDistance = zStartingDistance - 16
-    end
-    for move = 1, zStartingDistance do
-        fuelCheck()
-        tunnelOne()
+    if turtleCount ==
+    1 or 2 or 5 or 6 or
+    9 or 10 or 13 or 14 then
+        turnLeft()
+        if turtleCount == 1 or 5 or 9 or 13 then
+            for move = 1, 32 do
+                fuelCheck()
+                tunnelOne()
+            end
+        elseif turtleCount == 2 or 6 or 10 or 14 then
+            for move = 1, 16 do
+                fuelCheck()
+                tunnelOne()
+            end
+        end
+        turnRight()
     end
 end
 
@@ -305,9 +290,16 @@ local function mainInit()
     travelStartPoint()
 end
 
+
 mainInit()
+
+
+
+
 
 
 -- // ADD // 
 -- ERROR too many turtles
 -- Collect fuel from above
+-- fix grid patterning
+-- create a program to make the turtles self build the whole operation 

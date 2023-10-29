@@ -100,7 +100,7 @@ local function digCheckFront()
         if blockBool then
             BlockID = data.name
         end
-        while BlockID ~= "computercraft:turtle_expanded" do
+        while turtle.detect() == true and BlockID ~= "computercraft:turtle_expanded" do
             turtle.dig()
         end
     end

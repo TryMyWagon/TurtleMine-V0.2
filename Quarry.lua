@@ -93,9 +93,16 @@ local function fuelObtain()
 end
 
 -- digChecks for gravel/sand etc
+-- will not break turtles
 local function digCheckFront()
-    while turtle.detect() == true and turtle.inspect.name() ~= "computercraft:turtle_expanded" do
-        turtle.dig()
+    while turtle.detect() == true do
+        local blockBool, data = turtle.inspect()
+        if blockBool then
+            BlockID = data.name
+        end
+        while BlockID ~= "computercraft:turtle_expanded" do
+            turtle.dig()
+        end
     end
 end
 local function digCheckUp()
@@ -103,11 +110,6 @@ local function digCheckUp()
         turtle.digUp()
     end
 end
-
-Queer = {}
-
-Queer.trrr = 1
-Queer.reee = 12
 
 -- Diggy diggy hole
 local function tunnelOne()

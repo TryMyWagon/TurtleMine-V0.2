@@ -278,9 +278,11 @@ local function travelStartPoint()
     howManyBlocks[9] = 16
     howManyBlocks[5] = 16
     howManyBlocks[1] = 16
-    for move = 1, howManyBlocks[TurtleCount] do
-        fuelCheck()
-        tunnelOne()
+    if(TurtleCount ~= 13 or 9 or 5 or 1) then
+        for move = 1, howManyBlocks[TurtleCount] do
+            fuelCheck()
+            tunnelOne()
+        end
     end
 end
 

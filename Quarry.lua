@@ -208,23 +208,23 @@ local function RTS()
 end
 
 local function travelStartPoint()
-    if turtleCount == 1 or 2 or 3 or 4 then
+    if turtleCount == 15 or 14 or 13 or 12 then
         for move = 1, 48 do
             fuelCheck()
             tunnelOne()
         end
-    elseif turtleCount == 5 or 6 or 7 or 8 then
+    elseif turtleCount == 11 or 10 or 9 or 8 then
         for move = 1, 32 do
             fuelCheck()
             tunnelOne()
         end
-    elseif turtleCount == 9 or 10 or 11 or 12 then
+    elseif turtleCount == 7 or 6 or 5 or 4 then
         for move = 1, 16 do
             fuelCheck()
             tunnelOne()
         end
     end
-    if turtleCount == 4 or 8 or 12 or 16 then
+    if turtleCount == 3 or 7 or 11 or 15 then
         turnRight()
         for move = 1, 16 do
             tunnelOne()
@@ -232,15 +232,15 @@ local function travelStartPoint()
         turnLeft()
     end
     if turtleCount ==
-    1 or 2 or 5 or 6 or
-    9 or 10 or 13 or 14 then
+    0 or 1 or 4 or 5 or
+    8 or 9 or 10 or 11 then
         turnLeft()
-        if turtleCount == 1 or 5 or 9 or 13 then
+        if turtleCount == 0 or 4 or 8 or 12 then
             for move = 1, 32 do
                 fuelCheck()
                 tunnelOne()
             end
-        elseif turtleCount == 2 or 6 or 10 or 14 then
+        elseif turtleCount == 1 or 5 or 9 or 13 then
             for move = 1, 16 do
                 fuelCheck()
                 tunnelOne()
@@ -252,7 +252,7 @@ end
 
 local function QuarryMain()
     local jTurn = true
-    local stripRow = 0
+    local stripRow = 0eeee
     while stripRow < 16 do
         stripMine()
         stripRow = stripRow + 1

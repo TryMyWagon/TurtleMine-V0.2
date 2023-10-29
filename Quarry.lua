@@ -94,7 +94,7 @@ end
 
 -- digChecks for gravel/sand etc
 local function digCheckFront()
-    while turtle.detect() == true do
+    while turtle.detect() == true and turtle.inspect.name() ~= "computercraft:turtle_expanded" do
         turtle.dig()
     end
 end
@@ -103,6 +103,11 @@ local function digCheckUp()
         turtle.digUp()
     end
 end
+
+Queer = {}
+
+Queer.trrr = 1
+Queer.reee = 12
 
 -- Diggy diggy hole
 local function tunnelOne()

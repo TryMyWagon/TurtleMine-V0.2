@@ -208,22 +208,23 @@ local function RTS()
 end
 
 local function travelStartPoint()
-    if turtleCount >= 12 and turtleCount <= 15 then
+    if TurtleCount >= 12 and TurtleCount <= 15 then
         for move = 1, 48 do
             fuelCheck()
             tunnelOne()
         end
-    elseif turtleCount >= 8 and turtleCount <= 11  then
+    elseif TurtleCount >= 8 and TurtleCount <= 11  then
         for move = 1, 32 do
             fuelCheck()
             tunnelOne()
         end
-    elseif turtleCount >= 7 and turtleCount <= 4 then
+    elseif TurtleCount >= 7 and TurtleCount <= 4 then
         for move = 1, 16 do
             fuelCheck()
             tunnelOne()
         end
     end
+    local leftOrRight = {}
     leftOrRight[15] = false
     leftOrRight[14] = false
     leftOrRight[11] = false
@@ -236,11 +237,12 @@ local function travelStartPoint()
     leftOrRight[9] = true
     leftOrRight[5] = true
     leftOrRight[1] = true
-    if leftOrRight[turtleCount] == false then
+    if leftOrRight[TurtleCount] == false then
         turnLeft()
-    elseif leftOrRight[turtleCount] == true then
+    elseif leftOrRight[TurtleCount] == true then
         turnRight()
     end
+    local howManyBlocks = {}
     howManyBlocks[15] = 32
     howManyBlocks[11] = 32
     howManyBlocks[7] = 32
@@ -253,8 +255,7 @@ local function travelStartPoint()
     howManyBlocks[9] = 16
     howManyBlocks[5] = 16
     howManyBlocks[1] = 16
-
-    for move = 1, howManyBlocks[turtleCount] do
+    for move = 1, howManyBlocks[TurtleCount] do
         fuelCheck()
         tunnelOne()
     end
@@ -315,7 +316,7 @@ local function mainInit()
     turtle.turnRight()
     turtle.turnRight()
     turtle.select(1)
-    turtleCount = (turtle.getItemCount())
+    TurtleCount = (turtle.getItemCount())
     turtle.drop(64)
     turtle.turnLeft()
     travelStartPoint()

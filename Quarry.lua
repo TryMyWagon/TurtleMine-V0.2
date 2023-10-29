@@ -1,10 +1,10 @@
 
 -- Cartesian coordinates start at 0, 0 
 --[[
-1 = xPos+             (1. ~ x+)
-2 = zPos+                 |
-3 = xPos-                 |
-4 = zPos-    (4. ~ z-)----|----(2. ~ z+)
+1 = XPos+             (1. ~ x+)
+2 = ZPos+                 |
+3 = XPos-                 |
+4 = ZPos-    (4. ~ z-)----|----(2. ~ z+)
 .                         |
 .                         |
 .                     (3. ~ x-)
@@ -12,49 +12,60 @@
 
 
 -- x Position and z Position;
-xPos = 0
-zPos = 0
+XPos = 0
+ZPos = 0
 
 -- Rom 
-xRomPos = 0
-zRomPos = 0
+XRomPos = 0
+ZRomPos = 0
 
 -- Direction is 1 to 4
-tDir = 1
-tRomDir = 1
+TDir = 1
+TRomDir = 1
 
 -- movement to keep track of cartesian position
 local function forwardOne()
     turtle.forward()
-    if tDir == 1 then
-        xPos = xPos + 1
-    elseif tDir == 2 then
-        zPos = zPos + 1
-    elseif tDir == 3 then
-        xPos = xPos - 1
-    elseif tDir == 4 then
-        zPos = zPos - 1
+    if TDir == 1 then
+        XPos = XPos + 1
+    elseif TDir == 2 then
+        ZPos = ZPos + 1
+    elseif TDir == 3 then
+        XPos = XPos - 1
+    elseif TDir == 4 then
+        ZPos = ZPos - 1
     end
 end
 
 -- Right and left turn direction reccords
 local function turnRight()
     turtle.turnRight()
-    if tDir == 4 then
-        tDir = 1
+    if TDir == 4 then
+        TDir = 1
     else
-        tDir = tDir + 1
+        TDir = TDir + 1
     end
 end
 local function turnLeft()
     turtle.turnLeft()
-    if tDir == 1 then
-        tDir = 4
+    if TDir == 1 then
+        TDir = 4
     else
-        tDir = tDir - 1
+        TDir = TDir - 1
     end
 end
-
+-- function to face North (x+)
+local function faceNorth()
+    while TDir ~= 1 do
+        if TDir == 4 then
+            turnRight()
+        elseif TDir == 3 then
+            turnLeft()
+        elseif TDir == 2 then
+            turnLeft()
+        end
+    end
+end
 -- Fuelcheck function 
 local function fuelCheck()
     if turtle.getFuelLevel() < 32 then
@@ -67,6 +78,15 @@ local function fuelCheck()
             break
         end
         sleep(2)
+    end
+end
+-- pick up fuel from chest above (coal blocks)
+local function fuelObtain()
+    turtle.select(1)
+    if turtle.getItemDetail(name ~= "minecraft:coal_block") then
+        turtle.dropDown()
+        turtle.suckUp(5)
+        fuelCheck()
     end
 end
 
@@ -100,16 +120,16 @@ end
 
 -- Storage deposit function
 local function storeMaterials()
-    if xPos == 0 and zPos == 0 then
-        if tDir == 1 then
+    if XPos == 0 and ZPos == 0 then
+        if TDir == 1 then
             turnRight()
             turnRight()
-        elseif tDir == 2 then
+        elseif TDir == 2 then
             turnRight()
-        elseif tDir == 4 then
+        elseif TDir == 4 then
             turnLeft()
         end
-        if tDir == 3 then
+        if TDir == 3 then
             turtle.forward()
             for store = 2, 16 do
                 turtle.select(store)
@@ -124,24 +144,24 @@ local function storeMaterials()
 end
 
 
--- Return to base function (stores starting location and direction data in x/zRomPos and tRomDir var's)
+-- Return to base function (stores starting location and direction data in x/ZRomPos and TRomDir var's)
 local function RTB()
-    -- stores location data in xRomPos
-    xRomPos = xPos
-    -- stores location data in zRomPos
-    zRomPos = zPos
-    -- stores direction data in tRomDir
-    tRomDir = tDir
-    if xPos > 0 then
-        if tDir == 1 then
+    -- stores location data in XRomPos
+    XRomPos = XPos
+    -- stores location data in ZRomPos
+    ZRomPos = ZPos
+    -- stores direction data in TRomDir
+    TRomDir = TDir
+    if XPos > 0 then
+        if TDir == 1 then
             turnRight()
             turnRight()
-        elseif tDir == 2 then
+        elseif TDir == 2 then
             turnRight()
-        elseif tDir == 4 then
+        elseif TDir == 4 then
             turnLeft()
         end
-        for xReturn = 1, xRomPos do
+        for xReturn = 1, XRomPos do
             if turtle.detect() == true then
                 digCheckFront()
             end
@@ -149,16 +169,16 @@ local function RTB()
             forwardOne()
         end
     end
-    if zPos > 0 then
-        if tDir == 1 then
+    if ZPos > 0 then
+        if TDir == 1 then
             turnLeft()
-        elseif tDir == 2 then
+        elseif TDir == 2 then
             turnRight()
             turnRight()
-        elseif tDir == 3 then
+        elseif TDir == 3 then
             turnRight()
         end
-        for zReturn = 1, zRomPos do
+        for zReturn = 1, ZRomPos do
             if turtle.detect() == true then
                 digCheckFront()
             end
@@ -168,35 +188,35 @@ local function RTB()
     end
 end
 
--- Return to scene function (Return to the cordinates stored in x/zRomPos and tRomDir var's)
+-- Return to scene function (Return to the cordinates stored in x/ZRomPos and TRomDir var's)
 local function RTS()
-    if xPos == 0 and zPos == 0 then
-        -- face x+ (east) and moves (xRomPos) distance in blocks
-        if tDir == 1 then
+    if XPos == 0 and ZPos == 0 then
+        -- face x+ (east) and moves (XRomPos) distance in blocks
+        if TDir == 1 then
             turnRight()
-        elseif tDir == 3 then
+        elseif TDir == 3 then
             turnLeft()
-        elseif tDir == 4 then
+        elseif TDir == 4 then
             turnRight()
             turnRight()
         end
-        for returnZ = 1, zRomPos do
+        for returnZ = 1, ZRomPos do
             if turtle.detect() == true then
                 digCheckFront()
             end
             fuelCheck()
             forwardOne()
         end
-        -- face z+ (north) and moves (zRomPos) distance in blocks
-        if tDir == 2 then
+        -- face z+ (north) and moves (ZRomPos) distance in blocks
+        if TDir == 2 then
             turnLeft()
-        elseif tDir == 4 then
+        elseif TDir == 4 then
             turnRight()
-        elseif tDir == 3 then
+        elseif TDir == 3 then
             turnRight()
             turnRight()
         end
-        for returnX = 1, xRomPos do
+        for returnX = 1, XRomPos do
             if turtle.detect() == true then
                 digCheckFront()
             end
@@ -207,6 +227,7 @@ local function RTS()
     end
 end
 
+-- navigates to chosen chunk grid coordinates
 local function travelStartPoint()
     if TurtleCount >= 12 and TurtleCount <= 15 then
         for move = 1, 48 do
@@ -260,28 +281,7 @@ local function travelStartPoint()
         tunnelOne()
     end
 end
---[[
-    if(turtleCount == 15 or 11 or 7 or 3) then
-        for move = 1, 32 do
-            fuelCheck()
-            tunnelOne()
-        end
-        turnRight()
-    elseif(turtleCount == 14 or 10 or 6 or 2) then
-        for move = 1, 16 do
-            fuelCheck()
-            tunnelOne()
-        end
-        turnRight()
-    elseif(turtleCount == 13 or 9 or 5 or 1) then
-        for move = 1, 16 do
-            fuelCheck()
-            tunnelOne()
-        end
-        turnLeft()
-    end
-end
-]]--
+
 local function QuarryMain()
     local jTurn = true
     local stripRow = 0
@@ -320,6 +320,7 @@ local function mainInit()
     turtle.drop(64)
     turtle.turnLeft()
     travelStartPoint()
+    faceNorth()
 end
 
 

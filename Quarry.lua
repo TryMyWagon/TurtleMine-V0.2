@@ -224,29 +224,29 @@ local function travelStartPoint()
             tunnelOne()
         end
     end
-    if turtleCount == 3 or 7 or 11 or 15 then
+    if turtleCount == 15 or 14 or 11 or 10 or 7 or 6 or 3 or 2 then
+        turnLeft()
+    elseif turtleCount == 13 or 9 or 5 or 1 then
         turnRight()
+    end
+    if turtleCount == 15 or 11 or 7 or 3 then
+        for move = 1, 32 do
+            fuelCheck()
+            tunnelOne()
+        end
+        turnRight()
+    elseif turtleCount == 14 or 10 or 6 or 2 then
         for move = 1, 16 do
+            fuelCheck()
+            tunnelOne()
+        end
+        turnRight()
+    elseif turtleCount == 13 or 9 or 5 or 1 then
+        for move = 1, 16 do
+            fuelCheck()
             tunnelOne()
         end
         turnLeft()
-
-    elseif turtleCount ==
-    0 or 1 or 4 or 5 or
-    8 or 9 or 10 or 11 then
-        turnLeft()
-        if turtleCount == 0 or 4 or 8 or 12 then
-            for move = 1, 32 do
-                fuelCheck()
-                tunnelOne()
-            end
-        elseif turtleCount == 1 or 5 or 9 or 13 then
-            for move = 1, 16 do
-                fuelCheck()
-                tunnelOne()
-            end
-        end
-        turnRight()
     end
 end
 

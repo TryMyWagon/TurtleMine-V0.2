@@ -83,7 +83,9 @@ end
 -- pick up fuel from chest above (coal blocks)
 local function fuelObtain()
     turtle.select(1)
-    if turtle.getItemDetail(name ~= "minecraft:coal_block") then
+    if turtle.getItemDetail.name("minecraft:coal_block") then
+        fuelCheck()
+    else
         turtle.dropDown()
         turtle.suckUp(5)
         fuelCheck()

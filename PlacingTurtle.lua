@@ -11,5 +11,5 @@ local function Main()
     end
 end
 
---Main()
+Main()
 

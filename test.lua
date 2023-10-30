@@ -45,6 +45,7 @@ local function forwardOne(distanceInput)
     end
 end
 
+--[[
 function Test()
     io.write('Distance? (n) ')
     local distanceInput = io.read()
@@ -52,4 +53,23 @@ function Test()
     forwardOne(distanceInput)
 end
 
-Test()
+]]--Test()
+
+
+local event, modemSide, senderChannel, 
+    replyChannel, message, senderDistance = os.pullEvent("modem_message")
+
+local messageAllert = event.modem_message
+
+while true do
+    if messageAllert == "modem_message" then
+        print(message)
+        sleep(20)
+        for clear = 1,25 do
+            print("\n\n")
+        end
+    end
+end
+
+
+

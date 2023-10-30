@@ -28,9 +28,9 @@ TDir = 1
 TRomDir = 1
 
 -- movement to keep track of cartesian position
-local function forwardOne(a)
-    if (forwardOne(a) ~= nil and forwardOne(a) ~= 0) then
-        for distance = 1, a do
+local function forwardOne(distanceInput)
+    if (distanceInput ~= nil or 0) then
+        for distance = 1, distanceInput do
             turtle.forward()
             if TDir == 1 then
                 XPos = XPos + 1

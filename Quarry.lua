@@ -24,16 +24,20 @@ TDir = 1
 TRomDir = 1
 
 -- movement to keep track of cartesian position
-local function forwardOne()
-    turtle.forward()
-    if TDir == 1 then
-        XPos = XPos + 1
-    elseif TDir == 2 then
-        ZPos = ZPos + 1
-    elseif TDir == 3 then
-        XPos = XPos - 1
-    elseif TDir == 4 then
-        ZPos = ZPos - 1
+local function forwardOne(a)
+    if (forwardOne(a) ~= nil and forwardOne(a) ~= 0) then
+        for distance = 1, a do
+            turtle.forward()
+            if TDir == 1 then
+                XPos = XPos + 1
+            elseif TDir == 2 then
+                ZPos = ZPos + 1
+            elseif TDir == 3 then
+                XPos = XPos - 1
+            elseif TDir == 4 then
+                ZPos = ZPos - 1
+            end
+        end
     end
 end
 
@@ -346,9 +350,11 @@ mainInit()
 
 
 
-
 -- // ADD // 
 -- ERROR too many turtles
 -- Collect fuel from above
 -- fix grid patterning
--- create a program to make the turtles self build the whole operation 
+-- create a program to make the turtles self build the whole operation
+-- redo cartesian system
+-- single track for return trips
+-- restack the turtles somehow

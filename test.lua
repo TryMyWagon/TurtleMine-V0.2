@@ -1,3 +1,5 @@
+
+--[[
 local function cretin()
     local BlockBool, data = turtle.inspect()
     if BlockBool then
@@ -11,3 +13,43 @@ local function digCheckFront()
     end
 end
 digCheckFront()
+]]--
+
+-- x Position and z Position;
+XPos = 0
+ZPos = 0
+
+-- Rom 
+XRomPos = 0
+ZRomPos = 0
+
+-- Direction is 1 to 4
+TDir = 1
+TRomDir = 1
+
+-- movement to keep track of cartesian position
+local function forwardOne(a)
+    if (forwardOne(a) ~= nil and forwardOne(a) ~= 0) then
+        for distance = 1, a do
+            turtle.forward()
+            if TDir == 1 then
+                XPos = XPos + 1
+            elseif TDir == 2 then
+                ZPos = ZPos + 1
+            elseif TDir == 3 then
+                XPos = XPos - 1
+            elseif TDir == 4 then
+                ZPos = ZPos - 1
+            end
+        end
+    end
+end
+
+function Test()
+    io.write('Distance? (n) ')
+    local distanceInput = io.read()
+    print("Moving ", distanceInput, " blocks forward" )
+    forwardOne(distanceInput)
+end
+
+Test()

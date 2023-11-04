@@ -10,6 +10,4 @@ local function Main()
         sleep(3)
     end
 end
-
 Main()
-

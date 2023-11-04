@@ -4,7 +4,7 @@ for i = 1, 16 do
     event, modemSide, senderChannel, 
       replyChannel, message, senderDistance = os.pullEvent("modem_message")
     Quandale = "Quandale"
-    if message == Quandale then
+    if Quandale == message then
         while true do
            turtle.turnLeft() 
         end

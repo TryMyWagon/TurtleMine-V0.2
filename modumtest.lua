@@ -3,7 +3,6 @@ for i = 1, 16 do
     modem.open(3)  -- Open channel 3 so that we can listen on it
     event, modemSide, senderChannel, 
       replyChannel, message, senderDistance = os.pullEvent("modem_message")
-    
     Quandale = "Quandale"
     if message == Quandale then
         while true do
@@ -11,6 +10,5 @@ for i = 1, 16 do
         end
     end
     sleep(5)
-    
 end
 

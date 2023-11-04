@@ -3,9 +3,12 @@ for i = 1, 16 do
     modem.open(3)  -- Open channel 3 so that we can listen on it
     event, modemSide, senderChannel, 
       replyChannel, message, senderDistance = os.pullEvent("modem_message")
-
-
-    print(message)
-    sleep(3)
+    
+    if message == "Quandale" then
+        while true do
+           turtle.turnLeft() 
+        end
+    end
+    sleep(5)
 end
 

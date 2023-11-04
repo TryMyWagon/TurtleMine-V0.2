@@ -3,8 +3,10 @@ for i = 1, 16 do
     modem.open(3)  -- Open channel 3 so that we can listen on it
     local event, modemSide, senderChannel, 
       replyChannel, message, senderDistance = os.pullEvent("modem_message")
-    Quandale = "Quandale"
-    if Quandale == message then
+
+    local turtleCount = tonumber(message)
+
+    if turtleCount > 20 then
         while true do
            turtle.turnLeft()
         end

@@ -22,7 +22,8 @@ local function turnLeft(turnCount)
 end
 -- function for changing the faced direction with parseable north, east, south, west, arguments
 local function faceCardinalDirection(direction)
-    if string.lower(direction) == "north" then
+    local direction = string.lower(direction)
+    if direction == "north" then
         while TDir == not 1 do
             if TDir == 4 then
                 turtle.turnRight()
@@ -30,7 +31,7 @@ local function faceCardinalDirection(direction)
             end
             turnLeft()
         end
-    elseif string.lower(direction) == "east" then
+    elseif direction == "east" then
         while TDir == not 2 do
             if TDir == 1 then
                 turnRight()
@@ -38,7 +39,7 @@ local function faceCardinalDirection(direction)
             end
             turnLeft()
         end
-    elseif string.lower(direction) == "south" then
+    elseif direction == "south" then
         while TDir == not 3 do
             if TDir == 2 then
                 turnRight()
@@ -46,7 +47,7 @@ local function faceCardinalDirection(direction)
             end
             turnLeft()
         end
-    elseif string.lower(direction) == "west" then
+    elseif direction == "west" then
         while TDir == not 4 do
             if TDir == 3 then
                 turnRight()
@@ -82,7 +83,7 @@ local function main()
         turtle.placeUp()
         turtle.select(3)
         turtle.dropUp()
-        faceCardinalDirection("South")
+        faceCardinalDirection("south")
     end
 end
 -- init

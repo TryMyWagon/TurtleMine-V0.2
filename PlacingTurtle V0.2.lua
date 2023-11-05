@@ -177,6 +177,24 @@ local function transpose(vert, height)
     end
 end
 
+local function radioCheck()
+    -- chanell number is 57399
+    modum = peripheral.wrap("left")
+    modum.open(57399)
+end
+local function turtlePlace()
+    local computer = peripheral.wrap("front")
+    -- must call radiocheck first    
+    local turtlecount = 16
+    while turtlecount > 0 do
+        turtle.select(5)
+        turtlePlace()
+        computer.turnOn()
+        modum.transmit(57399, 57399, turtlecount)
+        turtlecount = turtlecount - 1
+        sleep(4)
+    end
+end
 -- items for Turtle slots
 -- s1 Coal chest
 -- s2 End chest base build
@@ -193,7 +211,7 @@ local function placeBase()
     turtle.select(2)
     digCheckFront()
     turtle.place()
-    for slotCount = 2, 6 do
+    for slotCount = 2, 5 do
         turtle.select(slotCount)
         turtle.suck()
     end
@@ -207,11 +225,9 @@ local function placeBase()
     transpose("up")
     turtle.select(4)
     turtle.placeDown()
-    turtle.select(5)
     digCheckUp()
+    turtle.select(1)
     turtle.placeUp()
-    turtle.select(6)
-    turtle.dropUp(64)
     forwardOne()
     faceCardinaldirection("north")
 end
@@ -219,3 +235,10 @@ end
 
 -- init
 placeBase()
+
+local function main()
+    placeBase()
+    radioCheck()
+end
+
+

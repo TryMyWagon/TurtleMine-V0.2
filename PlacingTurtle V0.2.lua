@@ -75,17 +75,37 @@ end
 local function digCheckFront()
     while turtle.detect() == true do
         local blockBool, data = turtle.inspect()
+            local blockID
         if blockBool then
-            BlockID = data.name
+            local blockID = data.name
         end
-        while turtle.detect() == true and BlockID ~= "computercraft:turtle_expanded" do
+        while turtle.detect() == true and blockID ~= "computercraft:turtle_expanded" do
             turtle.dig()
         end
     end
 end
 local function digCheckUp()
     while turtle.detectUp() == true do
-        turtle.digUp()
+        local blockBool, data = turtle.inspectUp()
+            local blockID
+        if blockBool then
+            local blockID = data.name
+        end
+        while turtle.detectUp() == true and blockID ~= "computercraft:turtle_expanded" do
+            turtle.digUp()
+        end
+    end
+end
+local function digCheckDown()
+    while turtle.detectDown() == true do
+        local blockBool, data = turtle.inspectDown()
+            local blockID
+        if blockBool then
+            local blockID = data.name
+        end
+        while turtle.detectDown() == true and blockID ~= "computercraft:turtle_expanded" do
+            turtle.digDown()
+        end
     end
 end
 
@@ -103,10 +123,10 @@ end
 -- movement to keep track of cartesian position
 local function forwardOne(move)
     move = move or 1
-    if turtle.detect() == true then
-        digCheckFront()
-    elseif turtle.detect() == false then
-        for distance = 1, move do
+    for i = 1, move do
+        if turtle.detect() == true then
+            digCheckFront()
+        elseif turtle.detect() == false then
             turtle.forward()
             if dir == 1 then
                 coordinates["x"] = coordinates["x"] + 1
@@ -131,20 +151,27 @@ local function transpose(vert, height)
         end
     elseif vert == "down" then
         for i = 1, height do
-            turtle.digDown() -- not turtle dig proof (can destroy other turtles)
+            digCheckDown()
             turtle.down()
             coordinates["y"] = coordinates["y"] - 1
         end
     end
 end
 
--- main() function
-local function main()
-    turtle.select(2) 
+-- place the setup down function
+-- put end chest in 2nd slot
+-- materials for the chest;
+-- s1 disk drive
+-- s2 floppy disk
+-- s3 storage chest
+-- s5 regular chest
+-- s6 coal block
+local function placeBase()
+    turtle.select(2)
     if turtle.getItemCount() > 0 then
         digCheckFront()
         turtle.place()
-        for slotCount = 2, 4 do
+        for slotCount = 2, 6 do
             turtle.select(slotCount)
             turtle.suck()
         end
@@ -154,8 +181,16 @@ local function main()
         turtle.dropUp()
         faceCardinaldirection("south")
         forwardOne()
-        transpose("up", 2)
+        transpose("up")
+        turtle.select(4)
+        turtle.placeDown()
+        turtle.select(5)
+        turtle.placeUp()
+        turtle.select(6)
+        turtle.dropUp(64)
+        forwardOne()
+        faceCardinaldirection("north")
     end
 end
 -- init
-main()
+placeBase()

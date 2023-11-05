@@ -1,7 +1,8 @@
 -- establishes direction and turn functions with rotation ammount arguments
 TDir = 1
+turnCount = 1
 local function turnRight(turnCount)
-    for dir = 1, turnCount do
+    for dir = 1, turnCount, 1 do
         turtle.turnRight()
         if TDir == 4 then
             TDir = 1
@@ -11,7 +12,7 @@ local function turnRight(turnCount)
     end
 end
 local function turnLeft(turnCount)
-    for dir = 1, turnCount do
+    for dir = 1, turnCount, 1 do
         turtle.turnLeft()
         if TDir == 1 then
             TDir = 4

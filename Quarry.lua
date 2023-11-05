@@ -1,3 +1,19 @@
+local function digCheckFront()
+    while turtle.detect() == true do
+        local blockBool, data = turtle.inspect()
+        if blockBool then
+            BlockID = data.name
+        end
+        while turtle.detect() == true and BlockID ~= "computercraft:turtle_expanded" do
+            turtle.dig()
+        end
+    end
+end
+local function digCheckUp()
+    while turtle.detectUp() == true do
+        turtle.digUp()
+    end
+end
 
 -- Cartesian coordinates start at 0, 0 
 --[[
@@ -24,9 +40,12 @@ TDir = 1
 TRomDir = 1
 
 -- movement to keep track of cartesian position
-local function forwardOne(a)
-    if (forwardOne(a) ~= nil and forwardOne(a) ~= 0) then
-        for distance = 1, a do
+local function forwardOne(move)
+    move = move or 1
+    if turtle.detect() == true then
+        digCheckFront()
+    elseif turtle.detect() == false then
+        for distance = 1, move do
             turtle.forward()
             if TDir == 1 then
                 XPos = XPos + 1
@@ -94,25 +113,6 @@ local function fuelObtain()
     turtle.suckUp(5)
     fuelCheck()
 --    end
-end
-
--- digChecks for gravel/sand etc
--- will not break turtles
-local function digCheckFront()
-    while turtle.detect() == true do
-        local blockBool, data = turtle.inspect()
-        if blockBool then
-            BlockID = data.name
-        end
-        while turtle.detect() == true and BlockID ~= "computercraft:turtle_expanded" do
-            turtle.dig()
-        end
-    end
-end
-local function digCheckUp()
-    while turtle.detectUp() == true do
-        turtle.digUp()
-    end
 end
 
 -- Diggy diggy hole

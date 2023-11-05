@@ -28,3 +28,19 @@ local function cum(name)
 end
 
 cum("real")
+
+
+
+
+local function coordinates(x, z, y)
+  
+end
+local coordinates = {}
+coordinates[1] = 0
+coordinates[2] = 0
+coordinates[3] = 0
+X = coordinates[1]
+Z = coordinates[2]
+Y = coordinates[3]
+
+end

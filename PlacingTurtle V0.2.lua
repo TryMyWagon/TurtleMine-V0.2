@@ -71,6 +71,9 @@ local function faceCardinaldirection(direction)
         end
     end
 end
+
+
+
 -- function to dig infront (gravity block proof) with a clause to disable mining of turtles
 local function digCheckFront()
     while turtle.detect() == true do
@@ -109,6 +112,19 @@ local function digCheckDown()
     end
 end
 
+-- Fuelcheck function 
+local function fuelCheck()
+    if turtle.getFuelLevel() < 32 then
+        turtle.select(1)
+        digCheckUp()
+        turtle.placeUp()
+        turtle.suckUp(64)
+        turtle.refuel(1)
+        turtle.dropUp()
+        digCheckUp()
+    end
+end
+
 -- Cartesian coordinates start at 0, 0 
 --[[
 1 = XPos+             (1. ~ x+)
@@ -125,6 +141,7 @@ local function forwardOne(move)
     move = move or 1
     for i = 1, move do
         if turtle.detect() == true then
+            fuelCheck()
             digCheckFront()
         elseif turtle.detect() == false then
             turtle.forward()
@@ -146,51 +163,59 @@ local function transpose(vert, height)
     if vert == "up" then
         for i = 1, height do
             digCheckUp()
+            fuelCheck()
             turtle.up()
             coordinates["y"] = coordinates["y"] + 1
         end
     elseif vert == "down" then
         for i = 1, height do
             digCheckDown()
+            fuelCheck()
             turtle.down()
             coordinates["y"] = coordinates["y"] - 1
         end
     end
 end
 
--- place the setup down function
--- put end chest in 2nd slot
+-- items for Turtle slots
+-- s1 Coal chest
+-- s2 End chest base build
+
 -- materials for the chest;
 -- s1 disk drive
 -- s2 floppy disk
 -- s3 storage chest
 -- s5 regular chest
 -- s6 coal block
+
+-- place the setup down function
 local function placeBase()
     turtle.select(2)
-    if turtle.getItemCount() > 0 then
-        digCheckFront()
-        turtle.place()
-        for slotCount = 2, 6 do
-            turtle.select(slotCount)
-            turtle.suck()
-        end
-        turtle.select(2)
-        turtle.placeUp()
-        turtle.select(3)
-        turtle.dropUp()
-        faceCardinaldirection("south")
-        forwardOne()
-        transpose("up")
-        turtle.select(4)
-        turtle.placeDown()
-        turtle.select(5)
-        turtle.placeUp()
-        turtle.select(6)
-        turtle.dropUp(64)
-        forwardOne()
-        faceCardinaldirection("north")
+    digCheckFront()
+    turtle.place()
+    for slotCount = 2, 6 do
+        turtle.select(slotCount)
+        turtle.suck()
     end
+    turtle.select(2)
+    digCheckUp()
+    turtle.placeUp()
+    turtle.select(3)
+    turtle.dropUp()
+    faceCardinaldirection("south")
+    forwardOne()
+    transpose("up")
+    turtle.select(4)
+    turtle.placeDown()
+    turtle.select(5)
+    digCheckUp()
+    turtle.placeUp()
+    turtle.select(6)
+    turtle.dropUp(64)
+    forwardOne()
+    faceCardinaldirection("north")
 end
+
+
 -- init
 placeBase()
